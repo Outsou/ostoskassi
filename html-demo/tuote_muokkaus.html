@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link href="../css/bootstrap.css" rel="stylesheet">
+        <link href="../css/bootstrap-theme.css" rel="stylesheet">
+        <link href="../css/main.css" rel="stylesheet">
+
+        <title>Etusivu</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+    </head>
+    <body>
+        <h1>SiipiLomat OY</h1>
+        <a style="float: right" href="url">Kirjaudu ulos</a>
+
+        <!--Side navigation bar-->
+        <ul class="nav affix">
+            <li class="active"><a href="tt_tuotteet.html"> Tuotteet</a></li>
+            <li class="active"><a href="tt_lennot.html"> Lennot</a></li>
+        </ul>
+
+        <!--Site content-->
+        <div class="container">
+            <img src="pics/mp3.png" alt="Smiley face" width="256" height="256" style="float: right">
+            <form role="form">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Nimi:</label>
+                    <input type="text" class="form-control" id="inputName" placeholder="nimi">
+                </div>
+                <div class="form-group">
+                    <label for="inputCategory">Kategoria:</label>
+                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Hinta:</label>
+                    <input type="number" class="form-control" id="inputName" placeholder="hinta">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Kuvaus:</label>
+                    <input type="text" class="form-control" id="inputDescription" placeholder="kuvaus">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputFile">Valitse kuva:</label>
+                    <input type="file" id="inputImage">
+                </div>
+                <button type="submit" class="btn btn-default">Tallenna</button>
+                <button type="submit" class="btn btn-default">Peruuta</button>
+                <button type="submit" class="btn btn-default">Poista</button>
+            </form>
+        </div>
+    </body>
+</html>
