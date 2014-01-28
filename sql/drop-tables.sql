@@ -1,0 +1,7 @@
+DROP TABLE IF EXISTS ostokset;
+DROP TABLE IF EXISTS tuotteet;
+DROP TABLE IF EXISTS tuoteryhmat;
+DROP TABLE IF EXISTS ateriapyynnot;
+DROP TABLE IF EXISTS paikkavaraukset;
+DROP TABLE IF EXISTS tyontekijat;
+DROP TABLE IF EXISTS asiakkaat;
