@@ -3,7 +3,9 @@ CREATE TABLE asiakkaat
 asiakasnumero integer primary key,
 nimi text,
 osoite text,
-puhelinnumero text
+sahkoposti text,
+kayttajanimi text,
+salasana text
 );
 
 CREATE TABLE tyontekijat

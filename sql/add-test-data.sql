@@ -1,5 +1,5 @@
-INSERT INTO asiakkaat VALUES (1, 'jaska jokunen', 'asdasd 3b', '045111111');
-INSERT INTO asiakkaat VALUES (2, 'maijja mallikas', 'asdasd 4b', '0452222');
+INSERT INTO asiakkaat VALUES (1, 'jaska jokunen', 'asdasd 3b', 'asd@hotmail.com', 'jaskanen', '1234');
+INSERT INTO asiakkaat VALUES (2, 'maijja mallikas', 'asdasd 4b', 'asd2@hotmail.com', 'maijjanen', '4321');
 
 INSERT INTO tyontekijat VALUES (1, 'maijja mehilainen');
 

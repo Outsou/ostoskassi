@@ -1,6 +1,7 @@
 <?php
 
 require_once 'libs/common.php';
+require_once 'libs/models/kayttaja.php';
 
 if (empty($_POST["kayttajanimi"]) || empty($_POST["salasana"])) {
     /* Käytetään omassa kirjastotiedostossa määriteltyä näkymännäyttöfunktioita */
@@ -11,14 +12,14 @@ $kayttaja = $_POST["kayttajanimi"];
 $salasana = $_POST["salasana"];
 
 /* Tarkistetaan onko parametrina saatu oikeat tunnukset */
-if ("otto" == $kayttaja && "1234" == $salasana) {
+if (Kayttaja::getKayttajaTunnuksilla($kayttaja, $salasana) != null) {
     /* Jos tunnus on oikea, ohjataan käyttäjä sopivalla HTTP-otsakkeella kissalistaan. */
     header('Location: etusivu.php');
 } else {
     /* Väärän tunnuksen syöttänyt saa eteensä kirjautumislomakkeen. */
     naytaNakyma("views/kirjautumislomake.php", array(
-    /* Välitetään näkymälle tieto siitä, kuka yritti kirjautumista */
-    'kayttaja' => $kayttaja,
-    'virhe' => "Kirjautuminen epäonnistui! Antamasi tunnus tai salasana on väärä."
-  ));
+        /* Välitetään näkymälle tieto siitä, kuka yritti kirjautumista */
+        'kayttaja' => $kayttaja,
+        'virhe' => "Kirjautuminen epäonnistui! Antamasi tunnus tai salasana on väärä."
+    ));
 }
