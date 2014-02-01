@@ -14,24 +14,24 @@
         <h1>SiipiLomat OY</h1>
         <!--If sivuID is null, don't make elements-->
         <?php if ($data->sivuID != NULL): ?>
-            <a style="float: right" href="url">Kirjaudu ulos</a>
+            <a style="float: right" href="uloskirjautuminen.php">Kirjaudu ulos</a>
 
             <!--Top navigation tabs-->
             <ul class="nav nav-tabs">
                 <?php if ($data->sivuID == 1): ?>
-                    <li class="active"><a href="etusivu.html">Etusivu</a></li>
-                    <li><a href="ostoskassi.html">Ostoskassi</a></li>
-                    <li><a href="ateriat.html">Ateriat</a></li>
+                    <li class="active"><a href="etusivu.php">Etusivu</a></li>
+                    <li><a href="ostoskassi.php">Ostoskassi</a></li>
+                    <li><a href="ateriat.php">Ateriat</a></li>
                 <?php endif; ?>
                 <?php if ($data->sivuID == 2): ?>
-                    <li><a href="etusivu.html">Etusivu</a></li>
-                    <li class="active"><a href="ostoskassi.html">Ostoskassi</a></li>
-                    <li><a href="ateriat.html">Ateriat</a></li>
+                    <li><a href="etusivu.php">Etusivu</a></li>
+                    <li class="active"><a href="ostoskassi.php">Ostoskassi</a></li>
+                    <li><a href="ateriat.php">Ateriat</a></li>
                 <?php endif; ?>
                 <?php if ($data->sivuID == 3): ?>
-                    <li><a href="etusivu.html">Etusivu</a></li>
-                    <li><a href="ostoskassi.html">Ostoskassi</a></li>
-                    <li class="active"><a href="ateriat.html">Ateriat</a></li>
+                    <li><a href="etusivu.php">Etusivu</a></li>
+                    <li><a href="ostoskassi.php">Ostoskassi</a></li>
+                    <li class="active"><a href="ateriat.php">Ateriat</a></li>
                 <?php endif; ?>
             </ul>
 

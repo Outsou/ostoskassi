@@ -9,5 +9,6 @@ if (isset($_SESSION['kirjautunut'])) {
 
 naytaNakyma('views/tuoteLista.php', array(
     'sivuID' => 1,
-    'asiakasnumero' => $asiakasnumero
+    'asiakasnumero' => $asiakasnumero,
+    'asiakas' => true
 ));

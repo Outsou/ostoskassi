@@ -11,7 +11,9 @@ salasana text
 CREATE TABLE tyontekijat
 (
 tunnusnumero integer primary key,
-nimi text
+nimi text,
+kayttajanimi text,
+salasana text
 );
 
 CREATE TABLE paikkavaraukset
