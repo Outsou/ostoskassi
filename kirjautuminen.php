@@ -11,9 +11,12 @@ if (empty($_POST["kayttajanimi"]) || empty($_POST["salasana"])) {
 $kayttaja = $_POST["kayttajanimi"];
 $salasana = $_POST["salasana"];
 
+session_start();
 /* Tarkistetaan onko parametrina saatu oikeat tunnukset */
-if (Kayttaja::getKayttajaTunnuksilla($kayttaja, $salasana) != null) {
+$kirjautuja = Kayttaja::getKayttajaTunnuksilla($kayttaja, $salasana);
+if ($kirjautuja != null) {
     /* Jos tunnus on oikea, ohjataan käyttäjä sopivalla HTTP-otsakkeella kissalistaan. */
+    $_SESSION['kirjautunut'] = $kirjautuja->getAsiakasnumero();
     header('Location: etusivu.php');
 } else {
     /* Väärän tunnuksen syöttänyt saa eteensä kirjautumislomakkeen. */
