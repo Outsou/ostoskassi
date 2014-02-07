@@ -1,3 +1,4 @@
+<title>Tuotteet</title>
 <h1>Koe</h1>
 <ul>
     <?php

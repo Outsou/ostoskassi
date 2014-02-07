@@ -19,7 +19,7 @@ foreach ($kysely->fetchAll(PDO::FETCH_OBJ) as $tulos) {
         <h1>Listaelementtitesti</h1>
         <ul>
             <?php foreach ($tulokset as $asia): ?>
-            <li>Nimi: <?php echo $asia->getName(); ?><br> Asiakasnumero: <?php echo $asia->getAsiakasnumero(); ?></li>
+            <li>Nimi: <?php echo $asia->getNimi(); ?><br> Asiakasnumero: <?php echo $asia->getAsiakasnumero(); ?></li>
             <?php endforeach; ?>
         </ul>
     </body>

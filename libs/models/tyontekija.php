@@ -37,7 +37,7 @@ class Tyontekija {
 
     /* Tähän gettereitä ja settereitä */
 
-    public function getName() {
+    public function getNimi() {
         return $this->nimi;
     }
 

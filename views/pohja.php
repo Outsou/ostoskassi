@@ -5,7 +5,6 @@
         <link href="css/bootstrap-theme.css" rel="stylesheet">
         <link href="css/main.css" rel="stylesheet">
 
-        <title>Etusivu</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width">
     </head>

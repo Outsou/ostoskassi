@@ -1,6 +1,6 @@
 CREATE TABLE asiakkaat
 (
-asiakasnumero integer primary key,
+asiakasnumero serial primary key,
 nimi text,
 osoite text,
 sahkoposti text,
@@ -10,7 +10,7 @@ salasana text
 
 CREATE TABLE tyontekijat
 (
-tunnusnumero integer primary key,
+tunnusnumero serial primary key,
 nimi text,
 kayttajanimi text,
 salasana text
@@ -18,7 +18,7 @@ salasana text
 
 CREATE TABLE paikkavaraukset
 (
-varausnumero integer primary key,
+varausnumero serial primary key,
 lento text,
 paikka text,
 varaaja integer references asiakkaat(asiakasnumero)
@@ -41,7 +41,7 @@ nimi text primary key
 
 CREATE TABLE tuotteet
 (
-tuotenumero integer primary key,
+tuotenumero serial primary key,
 nimi text,
 kuvaus text,
 hinta decimal,
