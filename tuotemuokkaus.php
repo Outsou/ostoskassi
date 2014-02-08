@@ -11,17 +11,56 @@ if (!onKirjautunutTyontekija()) {
 
 $id = (int) $_GET['id'];
 $kategoriat = Kategoria::getKategoriat();
-$tuote = Tuote::getTuote($id);
 
-if ($tuote != NULL) {
+if (empty($_POST["nimi"]) || (empty($_POST["hinta"]) && $_POST["hinta"] != 0) || empty($_POST["kuvaus"])) {
+    $tuote = Tuote::getTuote($id);
+
+    if ($_POST['poista'] === '1') {
+        $ok = $tuote->poistaTuote();
+        if ($ok) {
+            $_SESSION['ilmoitus'] = "Tuote poistettu onnistuneesti.";
+        } else {
+            $_SESSION['ilmoitus'] = "Tuotteen poisto epäonnistui.";
+        }
+        header('Location: tt_tuotteet.php');
+    } else {
+        if ($tuote != NULL) {
+            naytaNakyma('views/muokkaus.php', array(
+                'asiakas' => false,
+                'tuote' => $tuote,
+                'kategoriat' => $kategoriat
+            ));
+        } else {
+            naytaNakyma('views/muokkaus.php', array(
+                'asiakas' => false,
+                'virhe' => "Tuotetta ei löytynyt!"
+            ));
+        }
+    }
+}
+
+$muokattutuote = new Tuote();
+$muokattutuote->setTuotenumero($id);
+$muokattutuote->setNimi($_POST["nimi"]);
+$muokattutuote->setHinta($_POST["hinta"]);
+$muokattutuote->setKuvaus($_POST["kuvaus"]);
+$muokattutuote->setKategoria($_POST["kategoria"]);
+
+if (!$muokattutuote->onkoKelvollinen()) {
+    $virheet = $muokattutuote->getVirheet();
+
     naytaNakyma('views/muokkaus.php', array(
         'asiakas' => false,
-        'tuote' => $tuote,
-        'kategoriat' => $kategoriat
+        'tuote' => $muokattutuote,
+        'kategoriat' => $kategoriat,
+        'virheet' => $virheet
     ));
 } else {
-        naytaNakyma('views/muokkaus.php', array(
-        'asiakas' => false,
-        'virhe' => "Tuotetta ei löytynyt!"
-    ));
+    $ok = $muokattutuote->paivita();
+    if ($ok) {
+        $_SESSION['ilmoitus'] = "Tuote päivitetty onnistuneesti.";
+    } else {
+        $_SESSION['ilmoitus'] = "Tuotteen päivitys epäonnistui.";
+    }
+    header('Location: tt_tuotteet.php');
 }

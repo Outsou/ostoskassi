@@ -38,6 +38,10 @@ class Tuote {
         }
     }
 
+    public function getVirheet() {
+        return $this->virheet;
+    }
+
     public function getTuotenumero() {
         return $this->tuotenumero;
     }
@@ -72,6 +76,10 @@ class Tuote {
         $this->kuvaus = $uusikuvaus;
     }
 
+    public function setTuotenumero($uusituotenumero) {
+        $this->tuotenumero = $uusituotenumero;
+    }
+
     public function setHinta($uusihinta) {
         $this->hinta = $uusihinta;
 
@@ -104,6 +112,22 @@ class Tuote {
         if ($ok) {
             $this->tuotenumero = $kysely->fetchColumn();
         }
+        return $ok;
+    }
+
+    public function poistaTuote() {
+        $sql = "DELETE FROM tuotteet where tuotenumero = ?";
+        require_once 'libs/tietokantayhteys.php';
+        $kysely = getTietokantayhteys()->prepare($sql);
+        $ok = $kysely->execute(array($this->tuotenumero));
+        return $ok;
+    }
+
+    public function paivita() {
+        $sql = "UPDATE tuotteet SET nimi = ?, hinta = ?, kuvaus = ?, kategoria = ? WHERE tuotenumero = $this->tuotenumero";
+        require_once 'libs/tietokantayhteys.php';
+        $kysely = getTietokantayhteys()->prepare($sql);
+        $ok = $kysely->execute(array($this->nimi, $this->hinta, $this->kuvaus, $this->kategoria));
         return $ok;
     }
 

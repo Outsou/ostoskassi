@@ -10,7 +10,7 @@ if (!onKirjautunutTyontekija()) {
 
 $kategoriat = Kategoria::getKategoriat();
 
-if (empty($_POST["nimi"]) || empty($_POST["hinta"]) || empty($_POST["kuvaus"])) {
+if (empty($_POST["nimi"]) || (empty($_POST["hinta"]) && $_POST["hinta"] != 0) || empty($_POST["kuvaus"])) {
     naytaNakyma('views/lisays.php', array(
         'asiakas' => false,
         'kategoriat' => $kategoriat
@@ -34,9 +34,11 @@ if ($uusituote->onkoKelvollinen()) {
     $virheet = $uusituote->getVirheet();
 
     //Virheet voidaan nyt välittää näkymälle syötettyjen tietojen kera
-    naytaNakymä("views/lisays.php", array(
+    naytaNakyma("views/lisays.php", array(
         'tuote' => $uusituote,
-        'virheet' => $virheet
+        'virheet' => $virheet,
+        'asiakas' => FALSE,
+        'kategoriat' => $kategoriat
     ));
 }
 

@@ -57,6 +57,6 @@ paikkavaraus integer,
 tuote integer,
 primary key (paikkavaraus, tuote),
 foreign key (paikkavaraus) references paikkavaraukset,
-foreign key (tuote) references tuotteet
+foreign key (tuote) references tuotteet ON DELETE CASCADE
 );
 

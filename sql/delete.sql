@@ -1,0 +1,1 @@
+DELETE FROM tuotteet WHERE tuotenumero = 1;
