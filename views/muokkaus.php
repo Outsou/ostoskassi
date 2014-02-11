@@ -1,6 +1,6 @@
 <title>Muokkaus</title>
 <img src="<?php echo $data->tuote->getKuva(); ?>" width="256" height="256" style="float: right">
-<form role="form" action="tuotemuokkaus.php?id=<?php echo $data->tuote->getTuotenumero(); ?>" method="POST">
+<form role="form" action="tuotemuokkaus.php?id=<?php echo $data->tuote->getTuotenumero(); ?>" method="POST" enctype="multipart/form-data">
     <div class="form-group">
         <label for="inputNimi">Nimi:</label>
         <input type="text" class="form-control" id="inputName" value="<?php echo htmlspecialchars($data->tuote->getNimi()); ?>" required name="nimi">
@@ -29,7 +29,7 @@
     </div>
     <div class="form-group">
         <label for="exampleInputFile">Valitse kuva:</label>
-        <input type="file" id="inputImage">
+        <input type="file" id="file" name="file">
     </div>
     <button type="submit" class="btn btn-default">Tallenna</button>
     <button type="button" class="btn btn-default" onclick="parent.location='tt_tuotteet.php'">Peruuta</button>

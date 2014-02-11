@@ -34,6 +34,15 @@
                 ?>
             <?php endif; ?>
 
+            <?php if (!empty($_SESSION['ilmoitus2'])): ?>
+                <div class="alert alert-danger">
+                    <?php echo $_SESSION['ilmoitus2']; ?>
+                </div>
+                <?php
+                unset($_SESSION['ilmoitus2']);
+                ?>
+            <?php endif; ?>
+
             <?php if (!empty($data->virhe)): ?>
                 <div class="alert alert-danger"><?php echo $data->virhe; ?></div>
             <?php endif; ?>

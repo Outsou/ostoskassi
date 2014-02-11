@@ -63,7 +63,7 @@ class Tuote {
     public function getKategoria() {
         return $this->kategoria;
     }
-    
+
     public function getKuva() {
         return $this->kuva;
     }
@@ -132,17 +132,7 @@ class Tuote {
 
         if ($ok) {
             $this->tuotenumero = $kysely->fetchColumn();
-
-            if (!empty($this->kuva)) {
-                $temp = explode(".", $this->kuva["name"]);
-                $extension = end($temp);
-                if (!move_uploaded_file($this->kuva["tmp_name"], "upload/" . $this->tuotenumero . "." . $extension)) {
-                    $this->virheet['kuva'] = "Uploadaus epäonnistui!";
-                } else {
-                    $this->kuva = "upload/" . $this->tuotenumero . "." . $extension;
-                    $this->paivitaKuva();
-                }
-            }
+            $this->paivitaKuva();
         }
         return $ok;
     }
@@ -164,11 +154,23 @@ class Tuote {
     }
 
     public function paivitaKuva() {
-        $sql = "UPDATE tuotteet SET kuva = ? WHERE tuotenumero = $this->tuotenumero";
-        require_once 'libs/tietokantayhteys.php';
-        $kysely = getTietokantayhteys()->prepare($sql);
-        $ok = $kysely->execute(array($this->kuva));
-        return $ok;
+        if (!empty($this->kuva)) {
+            $temp = explode(".", $this->kuva["name"]);
+            $extension = end($temp);
+            $polku = "upload/" . $this->tuotenumero . "." . $extension;
+            
+            if (!move_uploaded_file($this->kuva["tmp_name"], $polku)) {
+                $this->virheet['kuva'] = "Uploadaus epäonnistui!";
+            } else {
+                chmod($polku, 0644);
+                $sql = "UPDATE tuotteet SET kuva = ? WHERE tuotenumero = $this->tuotenumero";
+                require_once 'libs/tietokantayhteys.php';
+                $kysely = getTietokantayhteys()->prepare($sql);
+                $ok = $kysely->execute(array($polku));
+                return $ok;
+            }
+        }
+        return false;
     }
 
 }

@@ -46,6 +46,10 @@ $muokattutuote->setHinta($_POST["hinta"]);
 $muokattutuote->setKuvaus($_POST["kuvaus"]);
 $muokattutuote->setKategoria($_POST["kategoria"]);
 
+if (!empty($_FILES['file']['name'])) {
+    $muokattutuote->setKuva($_FILES['file']);
+}
+
 if (!$muokattutuote->onkoKelvollinen()) {
     $virheet = $muokattutuote->getVirheet();
 
@@ -61,6 +65,14 @@ if (!$muokattutuote->onkoKelvollinen()) {
         $_SESSION['ilmoitus'] = "Tuote päivitetty onnistuneesti.";
     } else {
         $_SESSION['ilmoitus'] = "Tuotteen päivitys epäonnistui.";
+    }
+    if (!empty($_FILES['file']['name'])) {
+        $ok = $muokattutuote->paivitaKuva();
+        if ($ok) {
+            $_SESSION['ilmoitus2'] = "Kuva päivitetty onnistuneesti.";
+        } else {
+            $_SESSION['ilmoitus2'] = "Kuvan päivitys epäonnistui.";
+        }
     }
     header('Location: tt_tuotteet.php');
 }

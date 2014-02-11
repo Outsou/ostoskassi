@@ -23,7 +23,7 @@ $uusituote->setHinta($_POST["hinta"]);
 $uusituote->setKuvaus($_POST["kuvaus"]);
 $uusituote->setKategoria($_POST["kategoria"]);
 
-if (!empty($_FILES["file"])) {
+if (!empty($_FILES["file"]['name'])) {
     $uusituote->setKuva($_FILES["file"]);
 }
 
