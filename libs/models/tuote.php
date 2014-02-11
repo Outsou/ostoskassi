@@ -7,6 +7,7 @@ class Tuote {
     private $kuvaus;
     private $hinta;
     private $kategoria;
+    private $kuva;
     private $virheet = array();
 
     public function __construct($tuotenumero, $nimi, $kuvaus, $hinta, $kategoria) {
@@ -100,6 +101,10 @@ class Tuote {
         }
     }
 
+    public function setKuva($uusikuva) {
+        $this->kuva = $uusikuva;
+    }
+
     public function onkoKelvollinen() {
         return empty($this->virheet);
     }
@@ -109,6 +114,7 @@ class Tuote {
         require_once 'libs/tietokantayhteys.php';
         $kysely = getTietokantayhteys()->prepare($sql);
         $ok = $kysely->execute(array($this->getNimi(), $this->getKuvaus(), $this->getHinta(), $this->getKategoria()));
+
         if ($ok) {
             $this->tuotenumero = $kysely->fetchColumn();
         }

@@ -1,5 +1,5 @@
 <title>Lisays</title>
-<form role="form" action="tuotelisays.php" method="POST">
+<form role="form" action="tuotelisays.php" method="POST" enctype="multipart/form-data">
     <div class="form-group">
         <label for="inputNimi">Nimi:</label>
         <?php if (!empty($data->tuote)): ?>
@@ -41,7 +41,7 @@
     </div>
     <div class="form-group">
         <label for="exampleInputFile">Valitse kuva:</label>
-        <input type="file" id="inputImage">
+        <input type="file" name="file" id="file">
     </div>
     <button type="submit" class="btn btn-default">Tallenna</button>
     <button type="button" class="btn btn-default" onclick="parent.location='tt_tuotteet.php'">Peruuta</button>
