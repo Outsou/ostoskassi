@@ -19,7 +19,7 @@ class Tuote {
     }
 
     public static function getTuote($id) {
-        $sql = "SELECT tuotenumero, nimi, kuvaus, hinta, kategoria from tuotteet where tuotenumero = ? LIMIT 1";
+        $sql = "SELECT tuotenumero, nimi, kuvaus, hinta, kategoria, kuva from tuotteet where tuotenumero = ? LIMIT 1";
         require_once 'libs/tietokantayhteys.php';
         $kysely = getTietokantayhteys()->prepare($sql);
         $kysely->execute(array($id));
@@ -34,6 +34,7 @@ class Tuote {
             $tuote->kuvaus = $tulos->kuvaus;
             $tuote->hinta = $tulos->hinta;
             $tuote->kategoria = $tulos->kategoria;
+            $tuote->kuva = $tulos->kuva;
 
             return $tuote;
         }
@@ -61,6 +62,10 @@ class Tuote {
 
     public function getKategoria() {
         return $this->kategoria;
+    }
+    
+    public function getKuva() {
+        return $this->kuva;
     }
 
     public function setNimi($uusinimi) {
@@ -103,6 +108,16 @@ class Tuote {
 
     public function setKuva($uusikuva) {
         $this->kuva = $uusikuva;
+        $allowedExts = array("png");
+        $temp = explode(".", $uusikuva["name"]);
+        $extension = end($temp);
+        if ((($uusikuva["type"] == "image/png")) && ($uusikuva["size"] < 20000) && in_array($extension, $allowedExts)) {
+            if ($uusikuva["error"] > 0) {
+                $this->virheet['kuva'] = $uusikuva["error"];
+            }
+        } else {
+            $this->virheet['kuva'] = "Väärä tiedostotyyppi kuvalle!";
+        }
     }
 
     public function onkoKelvollinen() {
@@ -110,13 +125,24 @@ class Tuote {
     }
 
     public function lisaaKantaan() {
-        $sql = "INSERT INTO tuotteet (nimi, kuvaus, hinta, kategoria) VALUES (?,?,?,?)";
+        $sql = "INSERT INTO tuotteet (nimi, kuvaus, hinta, kategoria) VALUES (?,?,?,?) RETURNING tuotenumero";
         require_once 'libs/tietokantayhteys.php';
         $kysely = getTietokantayhteys()->prepare($sql);
         $ok = $kysely->execute(array($this->getNimi(), $this->getKuvaus(), $this->getHinta(), $this->getKategoria()));
 
         if ($ok) {
             $this->tuotenumero = $kysely->fetchColumn();
+
+            if (!empty($this->kuva)) {
+                $temp = explode(".", $this->kuva["name"]);
+                $extension = end($temp);
+                if (!move_uploaded_file($this->kuva["tmp_name"], "upload/" . $this->tuotenumero . "." . $extension)) {
+                    $this->virheet['kuva'] = "Uploadaus epäonnistui!";
+                } else {
+                    $this->kuva = "upload/" . $this->tuotenumero . "." . $extension;
+                    $this->paivitaKuva();
+                }
+            }
         }
         return $ok;
     }
@@ -134,6 +160,14 @@ class Tuote {
         require_once 'libs/tietokantayhteys.php';
         $kysely = getTietokantayhteys()->prepare($sql);
         $ok = $kysely->execute(array($this->nimi, $this->hinta, $this->kuvaus, $this->kategoria));
+        return $ok;
+    }
+
+    public function paivitaKuva() {
+        $sql = "UPDATE tuotteet SET kuva = ? WHERE tuotenumero = $this->tuotenumero";
+        require_once 'libs/tietokantayhteys.php';
+        $kysely = getTietokantayhteys()->prepare($sql);
+        $ok = $kysely->execute(array($this->kuva));
         return $ok;
     }
 

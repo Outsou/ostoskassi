@@ -45,7 +45,7 @@ tuotenumero serial primary key,
 nimi text,
 kuvaus text,
 hinta decimal,
-kuva bytea,
+kuva text,
 kategoria text references tuoteryhmat(nimi)
 );
 

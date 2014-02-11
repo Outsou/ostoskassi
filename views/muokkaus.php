@@ -1,5 +1,5 @@
 <title>Muokkaus</title>
-<img src="pics/mp3.png" alt="Smiley face" width="256" height="256" style="float: right">
+<img src="<?php echo $data->tuote->getKuva(); ?>" width="256" height="256" style="float: right">
 <form role="form" action="tuotemuokkaus.php?id=<?php echo $data->tuote->getTuotenumero(); ?>" method="POST">
     <div class="form-group">
         <label for="inputNimi">Nimi:</label>
