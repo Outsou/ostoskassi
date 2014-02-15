@@ -5,7 +5,7 @@ require_once 'libs/tietokantayhteys.php';
 require_once 'libs/models/tuote.php';
 
 if (!onKirjautunutTyontekija()) {
-    header('Location: kirjautuminen_tt.php');
+    header('Location: tt_kirjautuminen.php');
 }
 
 $kysely = getTietokantayhteys()->prepare("SELECT * FROM tuotteet ORDER BY nimi;");
@@ -19,14 +19,14 @@ foreach ($kysely->fetchAll(PDO::FETCH_OBJ) as $tulos) {
 
 if (count($tulokset) > 0) {
     /* Tuotteita on olemassa vähintään yksi */
-    naytaNakyma('views/tuoteLista_tt.php', array(
+    naytaNakyma('views/tt_tuoteLista.php', array(
         'asiakas' => false,
         'tuotteet' => $tulokset,
         'sivuID' => 1
     ));
 } else {
     /* Ei yhtään tuotetta, heitetään virheilmoitus */
-    naytaNakyma("views/tuoteLista_tt.php", array(
+    naytaNakyma("views/tt_tuoteLista.php", array(
         'virhe' => "Ei löytynyt yhtään tuotetta!",
         'asiakas' => false,
         'sivuID' => 1

@@ -37,14 +37,25 @@
             <!--Side navigation bar-->
             <ul class="nav affix">
                 <li class ="h4"><br>Tuotealueet:</li>
-                <li class="active"><a href="#dropdowns"> Elektroniikka</a></li>
-                <li class="active"><a href="#buttonGroups"> Lahjat</a></li>
-                <li class="active"><a href="#buttonGroups"> Lelut</a></li>
+                <li><a href="etusivu.php"> kaikki</a></li>
+                <?php foreach ($data->kategoriat as $kategoria): ?>
+                    <li><a href="etusivu.php?kategoria=<?php echo $kategoria->getNimi(); ?>"> <?php echo $kategoria->getNimi(); ?></a></li>
+                <?php endforeach; ?>
             </ul> 
         <?php endif; ?>
 
-        <!--Site content-->
+        <!--Site content-->        
         <div class="container">
+            <br>
+            <?php if (!empty($_SESSION['ilmoitus'])): ?>
+                <div class="alert alert-danger">
+                    <?php echo $_SESSION['ilmoitus']; ?>
+                </div>
+                <?php
+                unset($_SESSION['ilmoitus']);
+                ?>
+            <?php endif; ?>
+
             <?php if (!empty($data->virhe)): ?>
                 <div class="alert alert-danger"><?php echo $data->virhe; ?></div>
             <?php endif; ?>

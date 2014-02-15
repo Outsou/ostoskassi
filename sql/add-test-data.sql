@@ -4,8 +4,10 @@ INSERT INTO asiakkaat VALUES (DEFAULT, 'maijja mallikas', 'asdasd 4b', 'asd2@hot
 INSERT INTO tyontekijat VALUES (DEFAULT, 'maijja mehilainen', 'maijjis', 'maijjis1234');
 
 INSERT INTO paikkavaraukset VALUES (DEFAULT, 'ABC123', '25B', 1);
+INSERT INTO paikkavaraukset VALUES (DEFAULT, 'DEF', '24A', 1);
 
 INSERT INTO ateriapyynnot VALUES (FALSE, TRUE, 'tupla-ateria mulle', 1);
+INSERT INTO ateriapyynnot VALUES (TRUE, FALSE, '', 2);
 
 INSERT INTO tuoteryhmat VALUES ('elektroniikka');
 INSERT INTO tuoteryhmat VALUES ('vaatteet');

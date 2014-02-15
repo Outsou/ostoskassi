@@ -16,7 +16,7 @@
             if ($data->asiakas) {
                 echo '<form class="form-signin" action="kirjautuminen.php" method="POST">';
             } else {
-                echo '<form class="form-signin" action="kirjautuminen_tt.php" method="POST">';
+                echo '<form class="form-signin" action="tt_kirjautuminen.php" method="POST">';
             }
             ?>
             <h2 class = "form-signin-heading">Kirjaudu sisään</h2>

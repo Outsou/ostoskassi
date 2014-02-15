@@ -9,7 +9,7 @@ function naytaNakyma($sivu, $data = array()) {
     }
     else
     {
-       require 'views/pohja_tyontekijat.php'; 
+       require 'views/tt_pohja.php'; 
     }
     exit();
 }

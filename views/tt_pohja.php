@@ -11,7 +11,7 @@
     <body>
 
         <h1 style="float: left">SiipiLomat OY</h1> <br><br>
-        <a style="float: right" href="uloskirjautuminen_tt.php">Kirjaudu ulos</a> <br>
+        <a style="float: right" href="tt_uloskirjautuminen.php">Kirjaudu ulos</a> <br>
 
         <hr>
 

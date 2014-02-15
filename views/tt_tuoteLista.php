@@ -12,7 +12,7 @@
         <?php foreach ($data->tuotteet as $tuote): ?>
         <tr>
             <td><?php echo $tuote->getTuotenumero(); ?></td>
-            <td><?php echo $tuote->getNimi(); ?></td>
+            <td><?php echo htmlspecialchars($tuote->getNimi()); ?></td>
             <td><a href="tuotemuokkaus.php?id=<?php echo $tuote->getTuotenumero() ?>">Muokkaa</a></td>
         </tr>
         <?php endforeach; ?>

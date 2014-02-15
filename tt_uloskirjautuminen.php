@@ -7,4 +7,4 @@ session_start();
 unset($_SESSION["kirjautunut_tt"]);
 
 //Yleensä kannattaa ulkos kirjautumisen jälkeen ohjata käyttäjä kirjautumissivulle
-header('Location: kirjautuminen_tt.php');
+header('Location: tt_kirjautuminen.php');

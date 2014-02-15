@@ -5,7 +5,7 @@ require_once 'libs/models/kategoria.php';
 require_once 'libs/models/tuote.php';
 
 if (!onKirjautunutTyontekija()) {
-    header('Location: kirjautuminen_tt.php');
+    header('Location: tt_kirjautuminen.php');
 }
 
 $kategoriat = Kategoria::getKategoriat();

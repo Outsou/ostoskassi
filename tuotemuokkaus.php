@@ -6,7 +6,7 @@ require_once 'libs/models/tuote.php';
 require_once 'libs/models/kategoria.php';
 
 if (!onKirjautunutTyontekija()) {
-    header('Location: kirjautuminen_tt.php');
+    header('Location: tt_kirjautuminen.php');
 }
 
 $id = (int) $_GET['id'];
