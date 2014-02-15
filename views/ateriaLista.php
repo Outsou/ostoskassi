@@ -5,7 +5,7 @@
             <?php
             echo "<option>-- valitse lento --</option>";
             foreach ($data->paikkavaraukset as $paikkavaraus) {
-                $varausnumero = $paikkavaraus->getVarausnumero();
+                $varausnumero = htmlspecialchars($paikkavaraus->getVarausnumero());
                 echo "<option>$varausnumero</option>";
             }
             ?>
@@ -37,7 +37,7 @@
         </div>
         <div class="form-group">
             <label for="inputKuvaus">Muuta:</label>
-            <input type="text" class="form-control" id="inputDescription" value="<?php echo $data->ateriatiedot->getMuu() ?>" name="muu">
+            <input type="text" class="form-control" id="inputDescription" value="<?php echo htmlspecialchars($data->ateriatiedot->getMuu()) ?>" name="muu">
         </div>
         <button type="submit" class="btn btn-default" name="tallenna" value="<?php echo $data->varaus ?>">Tallenna</button>
     </form>
