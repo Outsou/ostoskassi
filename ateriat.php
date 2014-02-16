@@ -34,6 +34,8 @@ if (!empty($_POST['tallenna'])) {
         'ateriatiedot' => $ateriatiedot
     ));
 }
+
+//Näytä paikkavarauksen ateriatiedot, jos paikkavaraus on valittu
 if (!empty($_POST['varaus'])) {
 
     $ateriatiedot = Ateria::getAteriatiedot($_POST['varaus']);
@@ -47,6 +49,7 @@ if (!empty($_POST['varaus'])) {
         'ateriatiedot' => $ateriatiedot
     ));
 } else {
+    //Asiakkaalla ei ole varattuja lentoja
     if (empty($paikkavaraukset)) {
         naytaNakyma('views/ateriaLista.php', array(
             'sivuID' => 3,

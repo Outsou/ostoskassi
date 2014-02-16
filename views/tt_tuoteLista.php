@@ -9,11 +9,11 @@
 		<th></th>
 	</tr>
         
-        <?php foreach ($data->tuotteet as $ostos): ?>
+        <?php foreach ($data->tuotteet as $tuote): ?>
         <tr>
-            <td><?php echo $ostos->getTuotenumero(); ?></td>
-            <td><?php echo htmlspecialchars($ostos->getNimi()); ?></td>
-            <td><a href="tuotemuokkaus.php?id=<?php echo $ostos->getTuotenumero() ?>">Muokkaa</a></td>
+            <td><?php echo $tuote->getTuotenumero(); ?></td>
+            <td><?php echo $tuote->getNimi(); ?></td>
+            <td><a href="tuotemuokkaus.php?id=<?php echo $tuote->getTuotenumero() ?>">Muokkaa</a></td>
         </tr>
         <?php endforeach; ?>
 </table>

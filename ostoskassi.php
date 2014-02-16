@@ -11,6 +11,7 @@ if (!onKirjautunut()) {
     header('Location: kirjautuminen.php');
 }
 
+//Ostoksen poisto
 if ($_POST['poista'] == 1) {
     $poistettava = new Ostos();
     $poistettava->setPaikkavaraus($_POST['varaus']);
@@ -24,6 +25,7 @@ $ostokset = array();
 $paikkavaraukset = Paikkavaraus::getVaraukset($_SESSION['kirjautunut']);
 $kategoriat = Kategoria::getKategoriat();
 
+//Tee lista ostoksista ja tuotteista
 foreach ($paikkavaraukset as $varaus) {
     $tulokset = Ostos::getOstoksetVarausnumerolla($varaus->getVarausnumero());
     foreach ($tulokset as $ostos) {
@@ -33,6 +35,7 @@ foreach ($paikkavaraukset as $varaus) {
     }
 }
 
+//Tilaa-nappia painettu
 if ($_POST['tilaus'] == 1) {
     foreach ($ostokset as $paivitettavaostos) {
         $ostos = new Ostos();

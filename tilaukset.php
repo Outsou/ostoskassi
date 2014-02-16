@@ -24,6 +24,7 @@ $ostokset = array();
 $paikkavaraukset = Paikkavaraus::getVaraukset($_SESSION['kirjautunut']);
 $kategoriat = Kategoria::getKategoriat();
 
+//Tee lista ostoksista ja tuotteista
 foreach ($paikkavaraukset as $varaus) {
     $tulokset = Ostos::getOstoksetVarausnumerolla($varaus->getVarausnumero());
     foreach ($tulokset as $ostos) {

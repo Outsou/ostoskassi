@@ -25,6 +25,7 @@ if (isset($_POST['lisaa'])) {
     $uusiostos->setTilattu("TRUE");
     $uusiostos->setTuote($id);
 
+    //Virheellinen syöte
     if (!$uusiostos->onkoKelvollinen() || $_POST['varaus'] == '-- valitse lento --') {
         $virheet = $uusiostos->getVirheet();
 
@@ -42,7 +43,8 @@ if (isset($_POST['lisaa'])) {
             'virheet' => $virheet
         ));
     }
-
+    
+    //Ei saa olla samalle paikkavaraukselle useampia tilauksia samasta tuotteesta.
     if ($uusiostos->onkoKannassa()) {
         $_SESSION['ilmoitus'] = "Sinulla on jo tilaus kyseisestä tuotteesta kyseiselle lennolle.";
 
@@ -69,6 +71,7 @@ if (isset($_POST['lisaa'])) {
 
     header('Location: etusivu.php');
 } else {
+    //Näkymä ensimmäisellä avauskerralla
     naytaNakyma('views/tuotesivu.php', array(
         'asiakas' => true,
         'sivuID' => 0,
