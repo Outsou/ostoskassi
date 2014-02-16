@@ -20,5 +20,5 @@ INSERT INTO tuotteet VALUES (DEFAULT, 'sukat', 'mustat sukat', 5, NULL, 'vaattee
 INSERT INTO tuotteet VALUES (DEFAULT, 'shampoo', 'pesee hiukset', 1, NULL, 'kosmetiikka');
 
 INSERT INTO ostokset VALUES (3, TRUE, 1, 1);
-INSERT INTO ostokset VALUES (2, FALSE, 1, 1);
+INSERT INTO ostokset VALUES (2, FALSE, 1, 2);
 

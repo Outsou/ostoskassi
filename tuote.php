@@ -19,14 +19,14 @@ if (isset($_POST['maara'])) {
 }
 
 if (isset($_POST['lisaa'])) {
-    $ostos = new Ostos();
-    $ostos->setMaara($maara);
-    $ostos->setPaikkavaraus($_POST['varaus']);
-    $ostos->setTilattu("FALSE");
-    $ostos->setTuote($id);
+    $uusiostos = new Ostos();
+    $uusiostos->setMaara($maara);
+    $uusiostos->setPaikkavaraus($_POST['varaus']);
+    $uusiostos->setTilattu("TRUE");
+    $uusiostos->setTuote($id);
 
-    if (!$ostos->onkoKelvollinen() || $_POST['varaus'] == '-- valitse lento --') {
-        $virheet = $ostos->getVirheet();
+    if (!$uusiostos->onkoKelvollinen() || $_POST['varaus'] == '-- valitse lento --') {
+        $virheet = $uusiostos->getVirheet();
 
         if ($_POST['varaus'] == '-- valitse lento --') {
             $virheet[] = "Valitse lento.";
@@ -42,16 +42,31 @@ if (isset($_POST['lisaa'])) {
             'virheet' => $virheet
         ));
     }
-    if ($ostos->onkoKannassa()) {
-        $uusiMaara = $maara + Ostos::getOstos($_POST['varaus'], $id, "FALSE")->getMaara();
-        $ostos->setMaara($uusiMaara);
-        $ostos->paivita();
-        $_SESSION['ilmoitus'] = "Ostos päivitetty";
+
+    if ($uusiostos->onkoKannassa()) {
+        $_SESSION['ilmoitus'] = "Sinulla on jo tilaus kyseisestä tuotteesta kyseiselle lennolle.";
+
+        naytaNakyma('views/tuotesivu.php', array(
+            'asiakas' => true,
+            'sivuID' => 0,
+            'tuote' => $ostos,
+            'maara' => $maara,
+            'kategoriat' => $kategoriat,
+            'paikkavaraukset' => $paikkavaraukset
+        ));
     } else {
-        $ostos->lisaaKantaan();
-        $_SESSION['ilmoitus'] = "Ostos lisätty.";
+        $uusiostos->setTilattu("FALSE");
+        if ($uusiostos->onkoKannassa()) {
+            $uusiMaara = $maara + Ostos::getOstos($_POST['varaus'], $id, "FALSE")->getMaara();
+            $uusiostos->setMaara($uusiMaara);
+            $uusiostos->paivita();
+            $_SESSION['ilmoitus'] = "Ostos päivitetty";
+        } else {
+            $uusiostos->lisaaKantaan();
+            $_SESSION['ilmoitus'] = "Ostos lisätty.";
+        }
     }
-    
+
     header('Location: etusivu.php');
 } else {
     naytaNakyma('views/tuotesivu.php', array(

@@ -19,21 +19,31 @@
                 <li><a href="etusivu.php">Etusivu</a></li>
                 <li><a href="ostoskassi.php">Ostoskassi</a></li>
                 <li><a href="ateriat.php">Ateriat</a></li>
+                <li><a href="tilaukset.php">Tilaukset</a></li>
             <?php endif; ?>
             <?php if ($data->sivuID == 1): ?>
                 <li class="active"><a href="etusivu.php">Etusivu</a></li>
                 <li><a href="ostoskassi.php">Ostoskassi</a></li>
                 <li><a href="ateriat.php">Ateriat</a></li>
+                <li><a href="tilaukset.php">Tilaukset</a></li>
             <?php endif; ?>
             <?php if ($data->sivuID == 2): ?>
                 <li><a href="etusivu.php">Etusivu</a></li>
                 <li class="active"><a href="ostoskassi.php">Ostoskassi</a></li>
                 <li><a href="ateriat.php">Ateriat</a></li>
+                <li><a href="tilaukset.php">Tilaukset</a></li>
             <?php endif; ?>
             <?php if ($data->sivuID == 3): ?>
                 <li><a href="etusivu.php">Etusivu</a></li>
                 <li><a href="ostoskassi.php">Ostoskassi</a></li>
                 <li class="active"><a href="ateriat.php">Ateriat</a></li>
+                <li><a href="tilaukset.php">Tilaukset</a></li>
+            <?php endif; ?>
+            <?php if ($data->sivuID == 4): ?>
+                <li><a href="etusivu.php">Etusivu</a></li>
+                <li><a href="ostoskassi.php">Ostoskassi</a></li>
+                <li><a href="ateriat.php">Ateriat</a></li>
+                <li class="active"><a href="tilaukset.php">Tilaukset</a></li>
             <?php endif; ?>
         </ul>
 

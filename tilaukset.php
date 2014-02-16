@@ -14,7 +14,7 @@ if (!onKirjautunut()) {
 if ($_POST['poista'] == 1) {
     $poistettava = new Ostos();
     $poistettava->setPaikkavaraus($_POST['varaus']);
-    $poistettava->setTilattu("FALSE");
+    $poistettava->setTilattu("TRUE");
     $poistettava->setTuote($_POST['tuote']);
 
     $poistettava->poistaOstos();
@@ -27,42 +27,27 @@ $kategoriat = Kategoria::getKategoriat();
 foreach ($paikkavaraukset as $varaus) {
     $tulokset = Ostos::getOstoksetVarausnumerolla($varaus->getVarausnumero());
     foreach ($tulokset as $ostos) {
-        if ($ostos->getTilattu() != 1) {
+        if ($ostos->getTilattu()) {
             $ostokset[] = new Ostostuote($ostos, Tuote::getTuote($ostos->getTuote()));
         }
     }
-}
-
-if ($_POST['tilaus'] == 1) {
-    foreach ($ostokset as $paivitettavaostos) {
-        $ostos = new Ostos();
-        $ostos->setMaara($paivitettavaostos->getOstos()->getMaara());
-        $ostos->setPaikkavaraus($paivitettavaostos->getOstos()->getPaikkavaraus());
-        $ostos->setTuote($paivitettavaostos->getOstos()->getTuote());
-        $ostos->setTilattu("FALSE");
-        $ostos->poistaOstos();
-
-        $ostos->setTilattu("TRUE");
-        $ostos->lisaaKantaan();
-    }
-    $_SESSION['ilmoitus'] = "Tilaus suoritettu.";
-    header('Location: etusivu.php');
-    exit();
 }
 
 if (empty($ostokset)) {
     $_SESSION['ilmoitus'] = "Ei ostoksia";
 
     naytaNakyma('views/ostosLista.php', array(
-        'sivuID' => 2,
+        'sivuID' => 4,
         'asiakas' => true,
-        'kategoriat' => $kategoriat
+        'kategoriat' => $kategoriat,
+        'tilatut' => TRUE
     ));
 } else {
     naytaNakyma('views/ostosLista.php', array(
-        'sivuID' => 2,
+        'sivuID' => 4,
         'asiakas' => true,
         'ostokset' => $ostokset,
-        'kategoriat' => $kategoriat
+        'kategoriat' => $kategoriat,
+        'tilatut' => TRUE
     ));
 }
