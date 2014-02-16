@@ -11,17 +11,17 @@ if (!onKirjautunutTyontekija()) {
 $kysely = getTietokantayhteys()->prepare("SELECT * FROM tuotteet ORDER BY nimi;");
 $kysely->execute();
 
-$tulokset = array();
+$tuotteet = array();
 foreach ($kysely->fetchAll(PDO::FETCH_OBJ) as $tulos) {
-    $tuote = new Tuote($tulos->tuotenumero, $tulos->nimi, $tulos->kuvaus, $tulos->hinta, $tulos->kategoria);
-    $tulokset[] = $tuote;
+    $ostos = new Tuote($tulos->tuotenumero, $tulos->nimi, $tulos->kuvaus, $tulos->hinta, $tulos->kategoria);
+    $tuotteet[] = $ostos;
 }
 
-if (count($tulokset) > 0) {
+if (count($tuotteet) > 0) {
     /* Tuotteita on olemassa vähintään yksi */
     naytaNakyma('views/tt_tuoteLista.php', array(
         'asiakas' => false,
-        'tuotteet' => $tulokset,
+        'tuotteet' => $tuotteet,
         'sivuID' => 1
     ));
 } else {

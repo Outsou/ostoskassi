@@ -13,10 +13,10 @@ $id = (int) $_GET['id'];
 $kategoriat = Kategoria::getKategoriat();
 
 if (empty($_POST["nimi"]) || (empty($_POST["hinta"]) && $_POST["hinta"] != 0) || empty($_POST["kuvaus"])) {
-    $tuote = Tuote::getTuote($id);
+    $ostos = Tuote::getTuote($id);
 
     if ($_POST['poista'] === '1') {
-        $ok = $tuote->poistaTuote();
+        $ok = $ostos->poistaTuote();
         if ($ok) {
             $_SESSION['ilmoitus'] = "Tuote poistettu onnistuneesti.";
         } else {
@@ -24,10 +24,10 @@ if (empty($_POST["nimi"]) || (empty($_POST["hinta"]) && $_POST["hinta"] != 0) ||
         }
         header('Location: tt_tuotteet.php');
     } else {
-        if ($tuote != NULL) {
+        if ($ostos != NULL) {
             naytaNakyma('views/muokkaus.php', array(
                 'asiakas' => false,
-                'tuote' => $tuote,
+                'tuote' => $ostos,
                 'kategoriat' => $kategoriat
             ));
         } else {

@@ -5,16 +5,14 @@
         <th>Nimi</th>
         <th>Hinta/€</th>
         <th>Kategoria</th>
-        <th></th>
     </tr>
 
-    <?php foreach ($data->tuotteet as $tuote): ?>
-        <?php if ((!empty($data->kategoria) && $tuote->getKategoria() == $data->kategoria) || empty($data->kategoria)): ?>
+    <?php foreach ($data->tuotteet as $ostos): ?>
+        <?php if ((!empty($data->kategoria) && $ostos->getKategoria() == $data->kategoria) || empty($data->kategoria)): ?>
             <tr>
-                <td><?php echo htmlspecialchars($tuote->getNimi()); ?></td>
-                <td><?php echo htmlspecialchars($tuote->getHinta()); ?></td>
-                <td><?php echo htmlspecialchars($tuote->getKategoria()); ?></td>
-                <td><a href="">Lisää kassiin</a></td>
+                <td><a href="tuote.php?id=<?php echo $ostos->getTuotenumero() ?>"><?php echo htmlspecialchars($ostos->getNimi()); ?></a></td>
+                <td><?php echo htmlspecialchars($ostos->getHinta()); ?></td>
+                <td><?php echo htmlspecialchars($ostos->getKategoria()); ?></td>
             </tr>
         <?php endif; ?>
     <?php endforeach; ?>

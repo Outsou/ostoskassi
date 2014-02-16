@@ -55,7 +55,7 @@ maara integer,
 tilattu boolean,
 paikkavaraus integer,
 tuote integer,
-primary key (paikkavaraus, tuote),
+primary key (paikkavaraus, tuote, tilattu),
 foreign key (paikkavaraus) references paikkavaraukset,
 foreign key (tuote) references tuotteet ON DELETE CASCADE
 );

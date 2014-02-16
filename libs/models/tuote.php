@@ -18,6 +18,20 @@ class Tuote {
         $this->kategoria = $kategoria;
     }
 
+    public static function getKaikkiTuotteet() {
+        require_once 'libs/tietokantayhteys.php';
+        $kysely = getTietokantayhteys()->prepare("SELECT * FROM tuotteet ORDER BY nimi;");
+        $kysely->execute();
+
+        $tulokset = array();
+        foreach ($kysely->fetchAll(PDO::FETCH_OBJ) as $tulos) {
+            $tuote = new Tuote($tulos->tuotenumero, $tulos->nimi, $tulos->kuvaus, $tulos->hinta, $tulos->kategoria);
+            $tulokset[] = $tuote;
+        }
+        
+        return $tulokset;
+    }
+
     public static function getTuote($id) {
         $sql = "SELECT tuotenumero, nimi, kuvaus, hinta, kategoria, kuva from tuotteet where tuotenumero = ? LIMIT 1";
         require_once 'libs/tietokantayhteys.php';
@@ -158,7 +172,7 @@ class Tuote {
             $temp = explode(".", $this->kuva["name"]);
             $extension = end($temp);
             $polku = "upload/" . $this->tuotenumero . "." . $extension;
-            
+
             if (!move_uploaded_file($this->kuva["tmp_name"], $polku)) {
                 $this->virheet['kuva'] = "Uploadaus epäonnistui!";
             } else {

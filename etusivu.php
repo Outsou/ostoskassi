@@ -1,7 +1,6 @@
 <?php
 
 require_once 'libs/common.php';
-require_once 'libs/tietokantayhteys.php';
 require_once 'libs/models/tuote.php';
 require_once 'libs/models/kategoria.php';
 
@@ -10,22 +9,14 @@ if (isset($_SESSION['kirjautunut'])) {
     $asiakasnumero = $_SESSION['kirjautunut'];
 }
 
-$kysely = getTietokantayhteys()->prepare("SELECT * FROM tuotteet ORDER BY nimi;");
-$kysely->execute();
-
-$tulokset = array();
-foreach ($kysely->fetchAll(PDO::FETCH_OBJ) as $tulos) {
-    $tuote = new Tuote($tulos->tuotenumero, $tulos->nimi, $tulos->kuvaus, $tulos->hinta, $tulos->kategoria);
-    $tulokset[] = $tuote;
-}
-
+$tuotteet = Tuote::getKaikkiTuotteet();
 $kategoriat = Kategoria::getKategoriat();
 
-if (count($tulokset) > 0) {
+if (count($tuotteet) > 0) {
     /* Tuotteita on olemassa vähintään yksi */
     naytaNakyma('views/tuoteLista.php', array(
         'asiakas' => true,
-        'tuotteet' => $tulokset,
+        'tuotteet' => $tuotteet,
         'sivuID' => 1,
         'asiakasnumero' => $asiakasnumero,
         'kategoriat' => $kategoriat,

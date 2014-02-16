@@ -9,7 +9,7 @@ if (!onKirjautunut()) {
     header('Location: kirjautuminen.php');
 }
 
-$paikkavaraukset = Paikkavaraus::getVaraukset(1);
+$paikkavaraukset = Paikkavaraus::getVaraukset($_SESSION['kirjautunut']);
 $kategoriat = Kategoria::getKategoriat();
 
 if (!empty($_POST['tallenna'])) {
