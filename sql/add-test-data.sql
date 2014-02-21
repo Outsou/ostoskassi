@@ -9,6 +9,7 @@ INSERT INTO paikkavaraukset VALUES (DEFAULT, 'ABC123', '25B', 1);
 
 INSERT INTO ateriapyynnot VALUES (FALSE, TRUE, 'tupla-ateria mulle', 1);
 INSERT INTO ateriapyynnot VALUES (TRUE, FALSE, '', 2);
+INSERT INTO ateriapyynnot VALUES (TRUE, FALSE, '', 3);
 
 INSERT INTO tuoteryhmat VALUES ('elektroniikka');
 INSERT INTO tuoteryhmat VALUES ('vaatteet');
