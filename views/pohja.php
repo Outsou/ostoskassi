@@ -46,9 +46,9 @@
                 <li class="active"><a href="tilaukset.php">Tilaukset</a></li>
             <?php endif; ?>
         </ul>
-
+        
         <!--Side navigation bar-->
-        <ul class="nav affix">
+        <ul class="nav navbar-left ">
             <li class ="h4"><br>Tuotealueet:</li>
             <li><a href="etusivu.php"> kaikki</a></li>
             <?php foreach ($data->kategoriat as $kategoria): ?>
