@@ -7,6 +7,7 @@ require_once './libs/models/../models/ateria.php';
 
 if (!onKirjautunut()) {
     header('Location: kirjautuminen.php');
+    exit();
 }
 
 $paikkavaraukset = Paikkavaraus::getVaraukset($_SESSION['kirjautunut']);

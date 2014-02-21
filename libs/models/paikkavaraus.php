@@ -29,6 +29,37 @@ class Paikkavaraus {
         return $tulokset;
     }
 
+    public static function getVarauksetLennolle($lento) {
+        $sql = "SELECT varausnumero, varaaja, paikka from paikkavaraukset where lento = ?";
+        require_once 'libs/tietokantayhteys.php';
+        $kysely = getTietokantayhteys()->prepare($sql);
+        $kysely->execute(array($lento));
+
+        $tulokset = array();
+        foreach ($kysely->fetchAll(PDO::FETCH_OBJ) as $tulos) {
+            $varaus = new Paikkavaraus($tulos->varausnumero, $tulos->lento, $tulos->paikka, $tulos->varaaja);
+            $tulokset[] = $varaus;
+        }
+
+        return $tulokset;
+    }
+
+    public static function getLennot() {
+        $sql = "SELECT lento from paikkavaraukset";
+        require_once 'libs/tietokantayhteys.php';
+        $kysely = getTietokantayhteys()->prepare($sql);
+        $kysely->execute();
+
+        $lennot = array();
+        foreach ($kysely->fetchAll(PDO::FETCH_OBJ) as $tulos) {
+            $lennot[] = $tulos->lento;
+        }
+
+        $tulos = array_unique($lennot);
+
+        return $tulos;
+    }
+
     public function getVarausnumero() {
         return $this->varausnumero;
     }

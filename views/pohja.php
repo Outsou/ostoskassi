@@ -46,15 +46,17 @@
                 <li class="active"><a href="tilaukset.php">Tilaukset</a></li>
             <?php endif; ?>
         </ul>
-        
-        <!--Side navigation bar-->
-        <ul class="nav navbar-left ">
-            <li class ="h4"><br>Tuotealueet:</li>
-            <li><a href="etusivu.php"> kaikki</a></li>
-            <?php foreach ($data->kategoriat as $kategoria): ?>
-                <li><a href="etusivu.php?kategoria=<?php echo $kategoria->getNimi(); ?>"> <?php echo $kategoria->getNimi(); ?></a></li>
-            <?php endforeach; ?>
-        </ul> 
+
+        <?php if (isset($data->sivuID)): ?>
+            <!--Side navigation bar-->
+            <ul class="nav navbar-left ">
+                <li class ="h4"><br>Tuotealueet:</li>
+                <li><a href="etusivu.php"> kaikki</a></li>
+                <?php foreach ($data->kategoriat as $kategoria): ?>
+                    <li><a href="etusivu.php?kategoria=<?php echo $kategoria->getNimi(); ?>"> <?php echo $kategoria->getNimi(); ?></a></li>
+                <?php endforeach; ?>
+            </ul> 
+        <?php endif; ?>
 
         <!--Site content-->        
         <div class="container">

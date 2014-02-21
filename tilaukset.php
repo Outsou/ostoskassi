@@ -9,6 +9,7 @@ require_once './libs/models/kategoria.php';
 
 if (!onKirjautunut()) {
     header('Location: kirjautuminen.php');
+    exit();
 }
 
 if ($_POST['poista'] == 1) {

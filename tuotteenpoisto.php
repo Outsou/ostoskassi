@@ -4,6 +4,7 @@ require_once './libs/models/tuote.php';
 
 if (!onKirjautunutTyontekija()) {
     header('Location: tt_kirjautuminen.php');
+    exit();
 }
 
 $id = (int) $_GET['id'];
