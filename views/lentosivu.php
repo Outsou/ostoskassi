@@ -1,5 +1,7 @@
 <title>Lento</title>
 
+Lento: <?php echo $data->lento ?>
+
 <table class="table">
     <tr>
         <th>Paikka</th>
@@ -10,10 +12,10 @@
 
     <?php foreach ($data->tilaukset as $tilaus): ?>
         <tr>
-            <td><?php echo $tilaus->getPaikkavaraus()->getPaikka() ?></td>
-            <td><?php echo $tilaus->getTuote()->getTuotenumero() ?></td>
-            <td><?php echo $tilaus->getTuote()->getNimi() ?></td>
-            <td><?php echo $tilaus->getOstos()->getMaara() ?></td>
+            <td><?php echo htmlspecialchars($tilaus->getPaikkavaraus()->getPaikka()) ?></td>
+            <td><?php echo htmlspecialchars($tilaus->getTuote()->getTuotenumero()) ?></td>
+            <td><?php echo htmlspecialchars($tilaus->getTuote()->getNimi()) ?></td>
+            <td><?php echo htmlspecialchars($tilaus->getOstos()->getMaara()) ?></td>
         </tr>
     <?php endforeach; ?>
 </table>

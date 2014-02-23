@@ -12,7 +12,8 @@ if (!onKirjautunutTyontekija()) {
 }
 
 if (isset($_GET['lento'])) {
-    $varaukset = Paikkavaraus::getVarauksetLennolle($_GET['lento']);
+    $lento = $_GET['lento'];
+    $varaukset = Paikkavaraus::getVarauksetLennolle($lento);
     $tilaukset = array();
 
     foreach ($varaukset as $varaus) {
@@ -24,23 +25,26 @@ if (isset($_GET['lento'])) {
         }
     }
 
-    if (count($varaukset) > 0) {
+    if (count($tilaukset) > 0) {
         naytaNakyma('views/lentosivu.php', array(
             'asiakas' => false,
             'sivuID' => 2,
-            'tilaukset' => $tilaukset
+            'tilaukset' => $tilaukset,
+            'lento' => $lento
         ));
     } else {
         naytaNakyma('views/lentosivu.php', array(
             'asiakas' => false,
             'sivuID' => 2,
-            'virhe' => "Lennolle ei löytynyt tilauksia."
+            'virhe' => "Lennolle ei löytynyt tilauksia.",
+            'lento' => $lento
         ));
     }
 } else {
     naytaNakyma('views/lentosivu.php', array(
         'asiakas' => false,
         'sivuID' => 2,
-        'virhe' => "Lentoa ei asetettu Get-muuttujassa."
+        'virhe' => "Lentoa ei asetettu Get-muuttujassa.",
+        'lento' => $lento
     ));
 }

@@ -29,12 +29,14 @@ if (empty($_POST["nimi"]) || (empty($_POST["hinta"]) && $_POST["hinta"] != 0) ||
             naytaNakyma('views/muokkaus.php', array(
                 'asiakas' => false,
                 'tuote' => $ostos,
-                'kategoriat' => $kategoriat
+                'kategoriat' => $kategoriat,
+                'muokkaus' => 1
             ));
         } else {
             naytaNakyma('views/muokkaus.php', array(
                 'asiakas' => false,
-                'virhe' => "Tuotetta ei löytynyt!"
+                'virhe' => "Tuotetta ei löytynyt!",
+                'muokkaus' => 1
             ));
         }
     }
@@ -58,7 +60,8 @@ if (!$muokattutuote->onkoKelvollinen()) {
         'asiakas' => false,
         'tuote' => $muokattutuote,
         'kategoriat' => $kategoriat,
-        'virheet' => $virheet
+        'virheet' => $virheet,
+        'muokkaus' => 1
     ));
 } else {
     $ok = $muokattutuote->paivita();

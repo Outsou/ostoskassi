@@ -7,7 +7,7 @@
 
     <?php foreach ($data->lennot as $lento): ?>
         <tr>
-            <td><a href="lento.php?lento=<?php echo $lento; ?>"><?php echo $lento; ?></a></td>
+            <td><a href="lento.php?lento=<?php echo $lento; ?>"><?php echo htmlspecialchars($lento); ?></a></td>
         </tr>
     <?php endforeach; ?>
 </table>
